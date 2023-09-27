@@ -6,13 +6,22 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AgentRotate2d))]
 [RequireComponent(typeof(AgentOverride2d))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class Pawn : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private Rigidbody2D rigidbody;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    public void MoveByDistance(Vector2 movement)
+    {
+        rigidbody.AddForce(movement, ForceMode2D.Force);
     }
 
     public void MoveToPosition(Vector2 position)
@@ -30,4 +39,6 @@ public class Pawn : MonoBehaviour
     {
         return (Vector2)transform.position;
     }
+    
+
 }

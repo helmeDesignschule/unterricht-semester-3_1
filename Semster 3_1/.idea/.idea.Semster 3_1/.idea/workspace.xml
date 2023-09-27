@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="df583725-3cc5-42b3-9f5d-a1b309c34b96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Semster 3_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Semster 3_1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pawn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMouseInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMouseInput.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +91,7 @@
       <workItem from="1695632053623" duration="22000" />
       <workItem from="1695632087079" duration="4319000" />
       <workItem from="1695726180669" duration="8302000" />
+      <workItem from="1695797053264" duration="1789000" />
     </task>
     <servers />
   </component>
