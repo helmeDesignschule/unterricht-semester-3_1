@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
     // - - Bullet Despawn after range
     // - - Damage Amount
     [SerializeField] private Pawn pawn;
-    [SerializeField] private Pawn playerPawn;
     [SerializeField] private float distanceUntilStop = 3;
     [SerializeField] private float targetingDuration = 1;
     [SerializeField] private EnemyAnimator animator;
@@ -32,14 +31,14 @@ public class EnemyController : MonoBehaviour
 
     private void UpdateMovement()
     {
-        if (Vector2.Distance(pawn.GetPosition(), playerPawn.GetPosition()) < distanceUntilStop)
+        if (Vector2.Distance(pawn.GetPosition(), PlayerManager.playerPawn.GetPosition()) < distanceUntilStop)
         {
             pawn.CancelMovement();
             TargetPlayer();
         }
         else
         {
-            pawn.MoveToPosition(playerPawn.GetPosition());
+            pawn.MoveToPosition(PlayerManager.playerPawn.GetPosition());
         }
     }
 
@@ -56,14 +55,10 @@ public class EnemyController : MonoBehaviour
         
         yield return new WaitForSeconds(targetingDuration);
 
-        Vector2 shootDirection = playerPawn.GetPosition() - pawn.GetPosition();
-        shootDirection.Normalize();
-
         Vector2 bulletSpawnPosition = pawn.GetPosition();
         Bullet newBullet = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-        Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), newBullet.GetComponent<CircleCollider2D>());
         
-        newBullet.Launch(shootDirection);
+        newBullet.Launch(pawn, PlayerManager.playerPawn.GetPosition());
         
         isTargetingPlayer = false;
     }
