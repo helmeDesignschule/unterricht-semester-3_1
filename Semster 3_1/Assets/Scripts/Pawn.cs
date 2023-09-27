@@ -21,6 +21,7 @@ public class Pawn : MonoBehaviour
 
     public void MoveByDistance(Vector2 movement)
     {
+        CancelMovement();
         rigidbody.AddForce(movement, ForceMode2D.Force);
     }
 
