@@ -22,7 +22,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     
     private bool isTargetingPlayer = false;
-    
+
+    private void Awake()
+    {
+        GameState.onStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameState.onStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState.State newState)
+    {
+        enabled = newState == GameState.State.InGame;
+    }
+
     private void Update()
     {
         if (!isTargetingPlayer)

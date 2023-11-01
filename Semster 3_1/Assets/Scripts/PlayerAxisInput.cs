@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerAxisInput : MonoBehaviour
 {
@@ -14,11 +13,19 @@ public class PlayerAxisInput : MonoBehaviour
 
     private void Awake()
     {
+        GameState.SetState(GameState.State.InGame);
         PlayerManager.playerPawn = pawn;
     }
 
     private void Update()
     {
+        if (pawn == null)
+        {
+            GameState.SetState(GameState.State.GameOver);
+            enabled = false;
+            return;
+        }
+        
         moveDirection.x = Input.GetAxis("Horizontal");
         moveDirection.y = Input.GetAxis("Vertical");
         moveDirection.Normalize();
