@@ -8,9 +8,6 @@ public class PlayerAxisInput : MonoBehaviour
 {
     [SerializeField] private PhysicsPawn pawn;
     [SerializeField] private float moveSpeed = 7;
-    [SerializeField] private Bullet bulletPrefab;
-
-    [SerializeField] private Weapon equippedWeapon;
     [SerializeField] private Inventory inventory;
     
     private Vector2 moveDirection;
@@ -19,7 +16,9 @@ public class PlayerAxisInput : MonoBehaviour
     {
         GameState.SetState(GameState.State.InGame);
         PlayerManager.playerPawn = pawn;
+        PlayerManager.playerInventory = inventory;
         inventory.pawn = pawn;
+        Debug.Log("Player was initialized");
     }
 
     private void Update()
@@ -39,29 +38,32 @@ public class PlayerAxisInput : MonoBehaviour
         Vector2 pawnToMouse = mousePosition - pawn.GetPosition();
         pawn.SetLookDirection(pawnToMouse);
 
-        //equippedWeapon = inventory.GetActiveWeapon();
-        if (Input.GetMouseButtonDown(0))
+        Weapon equippedWeapon = inventory.GetActiveWeapon();
+        if (equippedWeapon != null)
         {
-            equippedWeapon.StartAttacking();
+            if (Input.GetMouseButtonDown(0))
+            {
+                equippedWeapon.StartAttacking();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                equippedWeapon.StopAttacking();
+            }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.mouseScrollDelta.y < 0)
         {
-            equippedWeapon.StopAttacking();
+            inventory.SwitchToNextWeapon();
+        }
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            inventory.SwitchToPreviousWeapon();
         }
     }
 
     private void FixedUpdate()
     {
         pawn.MoveByForce(moveDirection * moveSpeed);
-    }
-
-    private void ShootBullet()
-    {
-        Bullet newBullet = Instantiate(bulletPrefab, pawn.GetPosition(), Quaternion.identity);
-
-        Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        newBullet.Launch(pawn, targetPosition);
     }
 }
