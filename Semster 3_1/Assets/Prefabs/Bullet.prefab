@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3384326503088913294}
   - component: {fileID: 8488219096465731628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5530270402936026838}
   - component: {fileID: 7313075134532220291}
   - component: {fileID: 2179070885086098811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b767904d7372394da3ca260d8838fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 14
+  speed: 7
   distanceUntilDespawn: 10
   damage: 1
   radius: 0.25

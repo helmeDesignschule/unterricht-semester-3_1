@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Inventory))]
 public class PlayerAxisInput : MonoBehaviour
 {
     [SerializeField] private PhysicsPawn pawn;
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private Bullet bulletPrefab;
 
+    [SerializeField] private Weapon equippedWeapon;
+    [SerializeField] private Inventory inventory;
+    
     private Vector2 moveDirection;
 
     private void Awake()
     {
         GameState.SetState(GameState.State.InGame);
         PlayerManager.playerPawn = pawn;
+        inventory.pawn = pawn;
     }
 
     private void Update()
@@ -30,9 +35,19 @@ public class PlayerAxisInput : MonoBehaviour
         moveDirection.y = Input.GetAxis("Vertical");
         moveDirection.Normalize();
 
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 pawnToMouse = mousePosition - pawn.GetPosition();
+        pawn.SetLookDirection(pawnToMouse);
+
+        //equippedWeapon = inventory.GetActiveWeapon();
         if (Input.GetMouseButtonDown(0))
         {
-            ShootBullet();
+            equippedWeapon.StartAttacking();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            equippedWeapon.StopAttacking();
         }
     }
 

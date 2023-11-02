@@ -27,11 +27,16 @@ public class Bullet : MonoBehaviour
         Vector2 direction = targetedPosition - shooter.GetPosition();
         direction.Normalize();
         
+        LaunchInDirection(shooter, direction);
+    }
+
+    public void LaunchInDirection(PawnBase shooter, Vector2 shootDirection)
+    {
         startPosition = transform.position;
         
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
         
-        GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
