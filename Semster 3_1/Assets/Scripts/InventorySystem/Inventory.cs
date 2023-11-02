@@ -23,12 +23,4 @@ public class Inventory : MonoBehaviour
         
         weapons.Remove(weapon);
     }
-
-    public Weapon GetActiveWeapon()
-    {
-        if (weapons.Count == 0)
-            return null;
-
-        return weapons[0];
-    }
 }
