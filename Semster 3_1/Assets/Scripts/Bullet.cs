@@ -14,7 +14,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Transform bulletVisuals;
 
     private Vector2 startPosition;
-
+    private Vector2 travelDirection;
+    
     private void OnValidate()
     {
         GetComponent<CircleCollider2D>().radius = radius;
@@ -37,17 +38,19 @@ public class Bullet : MonoBehaviour
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
         
         GetComponent<Rigidbody2D>().AddForce(shootDirection * speed, ForceMode2D.Impulse);
+        travelDirection = shootDirection;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
-
         HealthPointManager healthPointManager = col.gameObject.GetComponent<HealthPointManager>();
         if (healthPointManager != null)
         {
             healthPointManager.TakeDamage(damage);
+            FXManager.Instance.PlayBloodSplat(healthPointManager.transform.position, travelDirection);
         }
+        
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()

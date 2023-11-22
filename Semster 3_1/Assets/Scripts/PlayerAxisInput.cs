@@ -37,7 +37,7 @@ public class PlayerAxisInput : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 pawnToMouse = mousePosition - pawn.GetPosition();
         pawn.SetLookDirection(pawnToMouse);
-
+        
         Weapon equippedWeapon = inventory.GetActiveWeapon();
         if (equippedWeapon != null)
         {
