@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(AgentRotate2d))]
 [RequireComponent(typeof(AgentOverride2d))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -16,6 +15,8 @@ public class Pawn : PawnBase
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        
         rigidbody = GetComponent<Rigidbody2D>();
     }
 

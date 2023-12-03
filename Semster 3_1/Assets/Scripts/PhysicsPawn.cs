@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class PhysicsPawn : PawnBase
 {
+    [SerializeField] private PlayerAnimator animator;
     private Rigidbody2D rigidbody;
     
     private void Awake()
@@ -17,6 +18,11 @@ public class PhysicsPawn : PawnBase
     public void MoveByForce(Vector2 movement)
     {
         rigidbody.AddForce(movement, ForceMode2D.Force);
+        animator.SetLookDirection(movement);
     }
-    
+
+    private void FixedUpdate()
+    {
+        animator.SetSpeed(rigidbody.velocity.magnitude);
+    }
 }

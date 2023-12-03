@@ -6,11 +6,28 @@ using UnityEngine;
 public class EnemyAnimator : MonoBehaviour
 {
     [SerializeField] private GameObject targetingVisuals;
+    [SerializeField] private Animator animator;
 
+    private Vector3 lastPosition;
+    
     private void Awake()
     {
         targetingVisuals.SetActive(false);
+        lastPosition = transform.position;
     }
+
+    private void LateUpdate()
+    {
+        Vector3 movement = transform.position - lastPosition;
+        if (movement.magnitude > 0)
+        {
+            movement.Normalize();
+            animator.SetFloat("MoveDirectionX", movement.x);
+            animator.SetFloat("MoveDirectionY", movement.y);
+        }
+        lastPosition = transform.position;
+    }
+
 
     public void ShowTargetingAnimation(float duration)
     {
