@@ -39,7 +39,7 @@ public class SceneLoader : MonoBehaviour
         }
 
         //then, when the scene we want to load is not yet loaded, we load it
-        var newScene = SceneManager.GetSceneByName(newSceneName);
+        Scene newScene = SceneManager.GetSceneByName(newSceneName);
         if (!newScene.isLoaded)
         {
             yield return SceneManager.LoadSceneAsync(newSceneName, LoadSceneMode.Additive);
@@ -48,6 +48,8 @@ public class SceneLoader : MonoBehaviour
         //all instantiated objects get added to the active scene.
         //this way, all bullets and VFX elements we instantiate will be cleaned up
         //when we unload the scene again later on.
+        yield return null;
+        newScene = SceneManager.GetSceneByName(newSceneName);
         SceneManager.SetActiveScene(newScene);
         
         //lastly, we disalbe the loading screen and set the current scene accordingly

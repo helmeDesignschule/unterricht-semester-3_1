@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5383469173799505564}
   - component: {fileID: 1310189622716533093}
   m_Layer: 0
-  m_Name: '[Collectible]'
+  m_Name: '[Collectible] -unasigned-'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
